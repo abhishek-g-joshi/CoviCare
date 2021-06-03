@@ -1,0 +1,47 @@
+version: 2.1
+orbs:
+  coverage-reporter: codacy/coverage-reporter@11.5.0 # Invoke the Codacy Code Coverage orb
+  heroku: circleci/heroku@1.2.4 # Invoke the Heroku orb
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run: echo "npm installing"
+      - run: npm install
+  test:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run: echo "testing stuff"
+      - run: npm install
+      - run: npm run test
+  codacy-coverage-report:
+    docker:
+      - image: 'circleci/openjdk:8-jdk'
+    steps:
+      - checkout
+      - run: echo "run commands to generate the coverage result"
+      - coverage-reporter/send_report:
+          coverage-reports: 'coverage/lcov.info'
+          project-token: $CODACY_PROJECT_TOKEN
+  
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+      - codacy-coverage-report
+  heroku_deploy:
+     jobs:
+       - build
+       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+           requires:
+             - build # only run deploy-via-git job if the build job has completed
+           filters:
+             branches:
+               only: master # only run deploy-via-git job on master branch

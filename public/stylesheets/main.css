@@ -1,0 +1,173 @@
+/* Fonts */
+.logo {
+	font-family: 'Pacifico', cursive;
+}
+
+.logo-lg {
+	font-family: 'Pacifico', cursive;
+	font-size: 5.5rem;
+}
+
+.logo-md {
+	font-family: 'Pacifico', cursive;
+	font-size: 3rem;
+}
+
+.title-font {
+	font-family: 'Sriracha', cursive;
+}
+
+.body-font {
+	font-family: 'Montserrat', sans-serif;
+}
+
+/* Background */
+.site {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	background: linear-gradient(160deg, rgb(208, 236, 253), rgb(232, 246, 254));
+}
+
+.site-content {
+	flex: 1;
+	background-image: url(YelpCamp_Optimized.svg);
+	background-position: bottom;
+	background-repeat: no-repeat;
+}
+
+.landing-header {
+	z-index: 1;
+	text-align: center;
+	margin-top: 3rem;
+	color: white;
+}
+
+/* Bringing the navbar to the very top to avoid fade effect on it */
+#navbar {
+	z-index: 3;
+}
+
+/* Loading Screen */
+.loader {
+	position: relative; 
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.text {
+	color: rgb(30, 30, 30);
+	display: inline-block;
+	margin-left: 5px;
+}
+
+.bounceball {
+	position: relative;
+	display: inline-block;
+	height: 37px;
+	width: 15px;
+}
+
+.bounceball::before {
+    position: absolute;
+    content: "";
+    display: block;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgb(30, 30, 30);
+    transform-origin: 50%;
+    animation: bounce 500ms alternate infinite ease;
+}
+
+@keyframes bounce {
+	0% {
+		top: 30px;
+		height: 5px;
+		border-radius: 60px 60px 20px 20px;
+		transform: scaleX(2);
+	}
+	
+	35% {
+		height: 15px;
+		border-radius: 50%;
+		transform: scaleX(1);
+	}
+	
+	100% {
+		top: 0;
+	}
+}
+
+/* Campground index page campground card positioning */
+#campground-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.show-btn {
+	width: 100%;
+}
+
+/* Google Maps */
+#map {
+	height: 500px;
+    width: 100%;
+}
+
+.signup-login {
+	margin: 5rem auto;
+}
+
+/* Coloring the review stars yellow  */
+.checked {
+    color: yellow;
+}
+/* Hiding review stars to prevent empty/black starts from showing */
+.transparent {
+	display: none;
+}
+
+.new-edit-forms {
+	margin: 5rem auto;
+}
+
+/* Coloring back arrow icon blue */
+.back {
+	color: rgb(38, 126, 246);
+}
+
+/* Coloring plus icon white */
+.add {
+	color: white;
+}
+
+/* Coloring heart icon red */
+.heart {
+	color: red;
+}
+
+/* footer properties */
+.footer {
+	font-size: .75rem;
+}
+
+.transparent-header-background {
+	background-color: rgba(253, 253, 253, 0.5);
+}
+
+.photo-link {
+	overflow: hidden;
+}
+
+.photo-link img {
+	transition: transform .5s ease;
+}
+
+.photo-link:hover img {
+	transform: scale(1.25);
+}
