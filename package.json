@@ -35,5 +35,13 @@
     "@shelf/jest-mongodb": "^1.2.3",
     "jest": "^26.6.3",
     "jest-cli": "^26.6.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhishek-g-joshi/CoviCare.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abhishek-g-joshi/CoviCare/issues"
+  },
+  "homepage": "https://github.com/abhishek-g-joshi/CoviCare#readme"
 }

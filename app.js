@@ -38,13 +38,19 @@ var url = process.env.DATABASEURL;
 // checking DATABASEURL value
 //console.log(process.env.DATABASEURL);
 mongoose.connect(url, {
-		useNewUrlParser: true,
-		useCreateIndex: true
+	dbName : process.env.DB_NAME,
+	user: process.env.MONGO_USER,
+	pass: process.env.MONGO_PASSWORD,
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useFindAndModify: false
 	}). then (() => {
 		console.log("Conencted to DB");
 	}). catch((err) => {
 		console.log("ERROR:", err.message);
 });
+
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public")); // Using __dirname + is a better way to navigate to the file
@@ -111,4 +117,4 @@ app.use("/campgrounds/:id/reviews", reviewRoutes);
 const port = process.env.PORT || 3000;
 app.listen(port, process.env.IP, function(){
 	console.log("Server is on");
-	});
+});
