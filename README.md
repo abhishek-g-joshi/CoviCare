@@ -1,4 +1,4 @@
-# [YelpCamp](https://aqueous-reaches-28926.herokuapp.com/)
+# [CoviCare](https://aqueous-reaches-28926.herokuapp.com/)
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://aqueous-reaches-28926.herokuapp.com/)
 ![Security Headers](https://img.shields.io/security-headers?url=https%3A%2F%2Faqueous-reaches-28926.herokuapp.com%2F)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5db672c308be3e556462/maintainability)](https://codeclimate.com/github/JacobGrisham/YelpCamp/maintainability)
