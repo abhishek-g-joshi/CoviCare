@@ -27,13 +27,7 @@
 			<div class="col-md-3 mb-4 d-flex flex-column">
 				<div class="card border border-white mb-2" id="map"></div>
 				<div class="mb-2">
-					<a href="https://www.accuweather.com/en/world-weather" class="btn btn-light show-btn"><i class="fa fa-sun-o" aria-hidden="true"></i> Weather</a>
-				</div>
-				<div class="mb-2">
-					<a href="https://ngmdb.usgs.gov/topoview/viewer/#4/39.98/-100.06" class="btn btn-light show-btn"><i class="fa fa-map" aria-hidden="true"></i> Topo Map</a>
-				</div>
-				<div class="mb-2">
-					<a href="https://www.rei.com/h/camping-and-hiking" class="btn btn-light show-btn"><i class="fa fa-binoculars" aria-hidden="true"></i> Gear Up</a>
+					<a href="https://ngmdb.usgs.gov/topoview/viewer/#4/39.98/-100.06" class="btn btn-light show-btn"><i class="fa fa-map" aria-hidden="true"></i> Cowin</a>
 				</div>
 			</div>
 		</div>
@@ -147,7 +141,7 @@
 	</div>
 
 <!-- Google Maps API Script -->
-<script>
+<!-- <script>
   function initMap() {
     var lat = <%= campground.lat %>;
     var lng = <%= campground.lng %>;
@@ -174,6 +168,6 @@
     });
   }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY4KrSmNNdCc5jY1Kl77hXJYFzEwITSe0&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY4KrSmNNdCc5jY1Kl77hXJYFzEwITSe0&callback=initMap"></script> -->
 
 <%- include ("../partials/footer") %>
