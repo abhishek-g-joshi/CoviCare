@@ -33,10 +33,7 @@ mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
 // linking the database here with the one on Heroku
 var url = process.env.DATABASEURL;
-// Use the database below when in production
-// "mongodb://localhost/temporary_database"
-// checking DATABASEURL value
-//console.log(process.env.DATABASEURL);
+
 mongoose.connect(url, {
 	dbName : process.env.DB_NAME,
 	user: process.env.MONGO_USER,
