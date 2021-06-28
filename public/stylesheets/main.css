@@ -1,21 +1,21 @@
 /* Fonts */
 .logo {
-	font-family: 'Pacifico', cursive;
+	font-family: 'Montserrat';
 }
 
 .logo-lg {
-	font-family: 'Pacifico', cursive;
+	font-family: 'Montserrat';
 	font-size: 5.5rem;
 	color: grey;
 }
 
 .logo-md {
-	font-family: 'Pacifico', cursive;
+	font-family: 'Montserrat';
 	font-size: 3rem;
 }
 
 .title-font {
-	font-family: 'Sriracha', cursive;
+	font-family: 'Montserrat';
 }
 
 .body-font {
