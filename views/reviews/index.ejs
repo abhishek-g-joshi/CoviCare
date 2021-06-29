@@ -43,7 +43,7 @@
 						<div class="float-right d-inline-flex">
 							<% if(currentUser && review.author.id.equals(currentUser._id)){ %>
 								<a class="btn btn-xs btn-outline-warning mr-2"
-								href="/campgrounds/<%=campground._id %>/reviews/<%=review._id %>/edit">Edit</a>
+								href="/covicare/<%=campground._id %>/reviews/<%=review._id %>/edit">Edit</a>
 								<form id="delete-form" action="/campgrounds/<%=campground._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
 									<input type="submit" class="btn btn-xs btn-outline-danger delete-button" value="Delete">
 								</form>
@@ -55,7 +55,7 @@
 					<% }); %>
 					<% } %>
 					<div style="margin-top: 10px;">
-						<a href="/campgrounds/<%= campground._id %>"><i class="fa fa-angle-left back" aria-hidden="true"></i> Back</a>
+						<a href="/covicare/<%= campground._id %>"><i class="fa fa-angle-left back" aria-hidden="true"></i> Back</a>
 					</div>
 				</div>
 			</div>

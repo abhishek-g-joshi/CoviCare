@@ -1,0 +1,44 @@
+<%- include ("../partials/header") %>
+
+<div class="container">
+	<div class="row">
+			<div class="col-12 col-md-9 new-edit-forms">
+				<h1 class="text-center title-font">Add Covid Centre</h1>
+				<form action="/covicare" method="POST">
+					<!-- Note that the action="__" should equal the name of the post request url. -->
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input class="form-control" type="text" name="name" id="name" placeholder="Name of the Covid Centre" required>
+					</div>
+					<div class="form-group">
+						<label for="bedCount">Bed Count</label>
+						<input class="form-control" type="number" name="bedCount" id="bedCount" placeholder="number of beds available" min="0" step="1">
+					</div>
+					<div class="form-group">
+						<label for="remdesivirInjection">Remdesivir Injection</label>
+						<input class="form-control" type="number" name="remdesivirInjection" id="remdesivirInjection" placeholder="number of Remdesivir Injection available" min="0" step="1">
+					</div>
+					<div class="form-group">
+						<label for="image">Image Url</label>
+						<input class="form-control" type="text" name="image" id="image" placeholder="paste the website url of the image here" required>
+						<!-- We use the name attribute in our route to grab the data from our request.body -->
+					</div>
+					<div class="form-group">
+						<label for="address">Address</label>
+						<input class="form-control" type="text" name="address" id="address" placeholder="Mention full Address" required>
+					</div>
+					<div class="form-group">
+						<label for="description">Description</label>
+						<textarea class="form-control" type="text" name="description" id="description" placeholder="Share all the informataion about the covid centre!"></textarea>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-lg btn-block btn-success">Submit!</button>
+					</div>
+				</form>
+				<a href="/covicare"><i class="fa fa-angle-left back" aria-hidden="true"></i> Back</a>
+			</div>
+	</div>
+
+</div>
+
+<%- include ("../partials/footer") %>
