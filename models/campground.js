@@ -6,11 +6,13 @@ var campgroundSchema = new mongoose.Schema({
 	name: {type: String,
 			required: "Campground name cannot be blank."
 		},
-	price: Number,
+	bedCount: Number,
+	remdesivirInjection: Number,
 	image: {type: String,
 			required: "Campground image cannot be blank."
 		},
 	description: String,
+	address: String,
 	location: String,
 	lat: Number,
 	lng: Number,

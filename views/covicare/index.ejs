@@ -6,8 +6,8 @@
 			<h1 class="logo"><b>Welcome to <span class="logo-md">CoviCare</span></b></h1>
 			<p class="title-font mt-4">check out all the information about covid centres here.</p>
 			<div class="d-flex">
-				<a href="/campgrounds/new" class="btn btn-outline-dark rounded-pill mr-2"><i class="fa fa-plus-circle" aria-hidden="true"></i> CoviCare Centre </a>
-				<form action="/campgrounds" method="GET" class="form-inline">
+				<a href="/covicare/new" class="btn btn-outline-dark rounded-pill mr-2"><i class="fa fa-plus-circle" aria-hidden="true"></i> CoviCare Centre </a>
+				<form action="/covicare" method="GET" class="form-inline">
 					<div class="form-group">
 						<input type="text" name="search" placeholder="Search" class="form-control rounded-pill">
 					</div>
@@ -25,13 +25,15 @@
 		<% campgrounds.forEach(function(campground){ %>
 			<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 				<div class="card">
-					<a href="/campgrounds/<%= campground._id %>">
+					<a href="/covicare/<%= campground._id %>">
 						<div class="photo-link">
 							<img src="<%= campground.image %>" class="img-fluid" alt="<%= campground.name %>"></img>
 						</div>
 					</a>
 					<div class="card-body p-1">
 						<h4 class="title-font"><%= campground.name %></h4>
+						<h6>Bed Count: <%= campground.bedCount %></h6>
+						<h6>Remdesivir Count: <%= campground.remdesivirInjection %></h6>
 						<% if (campground.rating === 0) { %>
 							
 						<% } else { %>

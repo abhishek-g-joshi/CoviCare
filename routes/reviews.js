@@ -55,7 +55,7 @@ router.post("/", middleware.isLoggedIn, middleware.checkReviewExistence, functio
             //save campground
             campground.save();
             req.flash("success", "Review added");
-            res.redirect("/campgrounds/" + campground._id);
+            res.redirect("/covicare/" + campground._id);
         });
     });
 });
@@ -88,7 +88,7 @@ router.put("/:review_id", middleware.checkReviewOwnership, function (req, res) {
             //save changes
             campground.save();
             req.flash("success", "Review updated");
-            res.redirect('/campgrounds/' + campground._id);
+            res.redirect('/covicare/' + campground._id);
         });
     });
 });
@@ -110,7 +110,7 @@ router.delete("/:review_id", middleware.checkReviewOwnership, function (req, res
             //save changes
             campground.save();
             req.flash("success", "Review deleted");
-            res.redirect("/campgrounds/" + req.params.id);
+            res.redirect("/covicare/" + req.params.id);
         });
     });
 });
