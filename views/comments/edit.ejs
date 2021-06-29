@@ -5,7 +5,7 @@
 			<div class="col-12 col-md-9 new-edit-forms">
 				<h1 class="text-center title-font">Edit <%= campground.name %> Comment</h1>
 				<!-- campground_id is not working -->
-				<form action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
+				<form action="/covicare/<%=campground._id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
 					<!-- Note that the action="__" should equal the name of the post request url. -->
 					<div class="form-group">
 						<input class="form-control" type="text" name="comment[text]" value="<%=comment.text%>"></input>
@@ -14,7 +14,7 @@
 						<button class="btn btn-lg btn-block btn-success">Submit!</button>
 					</div>
 				</form>
-				<a href="/campgrounds"><i class="fa fa-angle-left back" aria-hidden="true"></i> Back</a>
+				<a href="/covicare"><i class="fa fa-angle-left back" aria-hidden="true"></i> Back</a>
 			</div>
 	</div>
 
