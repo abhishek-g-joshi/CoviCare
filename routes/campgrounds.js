@@ -8,8 +8,8 @@ var middleware = require("../middleware"); // Note that the default file in a di
 var NodeGeocoder = require("node-geocoder");
 var options = {
   provider: "google",
-  httpAdapter: "https",
-  apiKey: process.env.GEOCODER_API_KEY,
+  httpAdapter: "http",
+  apiKey: "AIzaSyDm0aemkm9OGTco0g3OlZv3L11CUFn4GdM",
   formatter: null
 };
 var geocoder = NodeGeocoder(options);
@@ -65,9 +65,16 @@ router.post("/", middleware.isLoggedIn, function(req, res){
       id: req.user._id,
       username: req.user.username
   }
+  console.log(req.body.location);
   geocoder.geocode(req.body.location, function (err, data) {
-    if (err || !data.length) {
-      req.flash("error", "Invalid address");
+    if (err) {
+      console.log(err.message);
+      req.flash("error", "error occur" );
+      return res.redirect("back");
+    }
+    if(!data.length)
+    {
+      req.flash("error", "Invalid address" );
       return res.redirect("back");
     }
     var lat = data[0].latitude;
@@ -76,15 +83,26 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var newCampground = {name: name, image: image, description: desc, author:author, location: location, lat: lat, lng: lng};
     // Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
-        if(err){
-            console.log(err);
-        } else {
-            //redirect back to campgrounds page
-            res.redirect("/campgrounds");
-			// Note that the redirect defaults to the GET request, not the POST request
-        }
-    });
+      if(err){
+          console.log(err);
+      } else {
+          //redirect back to campgrounds page
+          res.redirect("/campgrounds");
+    // Note that the redirect defaults to the GET request, not the POST request
+      }
   });
+    
+  });
+//   var newCampground = {name: name, image: image, description: desc, author:author};
+//   Campground.create(newCampground, function(err, newlyCreated){
+//     if(err){
+//         console.log(err);
+//     } else {
+//         //redirect back to campgrounds page
+//         res.redirect("/campgrounds");
+//   // Note that the redirect defaults to the GET request, not the POST request
+//     }
+// });
 });
 
 // NEW ROUTE
