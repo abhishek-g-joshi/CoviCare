@@ -5,14 +5,14 @@ var Review = require("../models/review");
 var middleware = require("../middleware"); // Note that the default file in a directory is index.js. Therefore, we don't need to write out ("../middleware/index.js")
 
 // Google Geocoder API Middleware
-var NodeGeocoder = require("node-geocoder");
-var options = {
-  provider: "google",
-  httpAdapter: "http",
-  apiKey: "AIzaSyDm0aemkm9OGTco0g3OlZv3L11CUFn4GdM",
-  formatter: null
-};
-var geocoder = NodeGeocoder(options);
+// var NodeGeocoder = require("node-geocoder");
+// var options = {
+//   provider: "google",
+//   httpAdapter: "https",
+//   apiKey: process.env.GEOCODER_API_KEY,
+//   formatter: null
+// };
+// var geocoder = NodeGeocoder(options);
 
 //=======================
 // ROUTES
@@ -35,9 +35,9 @@ router.get("/", function(req,res){
 				console.log(err);
 			} else {
 				if(allCampgrounds.length < 1) {
-					noMatch = "No campgrounds found";
+					noMatch = "No covicare centre found";
 				}
-				res.render("campgrounds/index", {campgrounds:allCampgrounds, noMatch: noMatch});
+				res.render("covicare/index", {campgrounds:allCampgrounds, noMatch: noMatch});
 				// "campgrounds" is the name of the data that we expect to find in that file
 				// recall that {"name we want":"data"}. We could name them differently, but they are commonly called the same thing. 
 			}
@@ -48,7 +48,7 @@ router.get("/", function(req,res){
 			if(err){
 				console.log(err);
 			} else {
-				res.render("campgrounds/index", {campgrounds:allCampgrounds, noMatch: noMatch});
+				res.render("covicare/index", {campgrounds:allCampgrounds, noMatch: noMatch});
 			}
 		});
 	}
@@ -65,51 +65,47 @@ router.post("/", middleware.isLoggedIn, function(req, res){
       id: req.user._id,
       username: req.user.username
   }
-  console.log(req.body.location);
-  geocoder.geocode(req.body.location, function (err, data) {
-    if (err) {
-      console.log(err.message);
-      req.flash("error", "error occur" );
-      return res.redirect("back");
-    }
-    if(!data.length)
-    {
-      req.flash("error", "Invalid address" );
-      return res.redirect("back");
-    }
-    var lat = data[0].latitude;
-    var lng = data[0].longitude;
-    var location = data[0].formattedAddress;
-    var newCampground = {name: name, image: image, description: desc, author:author, location: location, lat: lat, lng: lng};
-    // Create a new campground and save to DB
-    Campground.create(newCampground, function(err, newlyCreated){
+  var remdesivirInjection = req.body.remdesivirInjection;
+  var bedCount = req.body.bedCount;
+  var address = req.body.address;
+  // geocoder.geocode(req.body.location, function (err, data) {
+  //   if (err || !data.length) {
+  //     req.flash("error", "Invalid address");
+  //     return res.redirect("back");
+  //   }
+  //   var lat = data[0].latitude;
+  //   var lng = data[0].longitude;
+  //   var location = data[0].formattedAddress;
+  //   var newCampground = {name: name, image: image, description: desc, author:author, location: location, lat: lat, lng: lng};
+  //   // Create a new campground and save to DB
+  //   Campground.create(newCampground, function(err, newlyCreated){
+  //       if(err){
+  //           console.log(err);
+  //       } else {
+  //           //redirect back to campgrounds page
+  //           res.redirect("/campgrounds");
+	// 		// Note that the redirect defaults to the GET request, not the POST request
+  //       }
+  //   });
+  // });
+  var newCampground = {name: name, image: image, description: desc, author:author, remdesivirInjection:remdesivirInjection, bedCount:bedCount, address:address};
+  // Create a new campground and save to DB
+  Campground.create(newCampground, function(err, newlyCreated){
       if(err){
           console.log(err);
       } else {
           //redirect back to campgrounds page
-          res.redirect("/campgrounds");
+          res.redirect("/covicare");
     // Note that the redirect defaults to the GET request, not the POST request
       }
   });
-    
-  });
-//   var newCampground = {name: name, image: image, description: desc, author:author};
-//   Campground.create(newCampground, function(err, newlyCreated){
-//     if(err){
-//         console.log(err);
-//     } else {
-//         //redirect back to campgrounds page
-//         res.redirect("/campgrounds");
-//   // Note that the redirect defaults to the GET request, not the POST request
-//     }
-// });
 });
 
 // NEW ROUTE
 // This is page where we send/update the data
 router.get("/new", middleware.isLoggedIn, function(req, res){
 // Again, this naming convention is part of REST naming convention.
-	res.render("campgrounds/new");
+	res.render("covicare/new");
 });
 
 
@@ -126,7 +122,7 @@ router.get("/:id", function(req, res){
 			console.log(err);
 		} else {
 			// render the show template with that campground
-			res.render("campgrounds/show", {campground: foundCampground});
+			res.render("covicare/show", {campground: foundCampground});
 		}
 	});
 });
@@ -136,36 +132,53 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
 	// Find the Campground by Id
 	Campground.findById(req.params.id, function(err, foundCampground){
 		// Third Render the edit page in order to access to the edit form
-		res.render("campgrounds/edit", {campground: foundCampground});
+		res.render("covicare/edit", {campground: foundCampground});
 	});
 });	
 
 // UPDATE CAMPGROUND ROUTE
 router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
 	delete req.body.campground.rating; // protect the campground.rating field from manipulation
-  geocoder.geocode(req.body.location, function (err, data) {
-    if (err || !data.length) {
-      req.flash("error", "Something went wrong");
-		console.log(err);
-		return res.redirect("back");
-    }
-    req.body.campground.lat = data[0].latitude;
-    req.body.campground.lng = data[0].longitude;
-    req.body.campground.location = data[0].formattedAddress;
+  
+  // geocoder.geocode(req.body.location, function (err, data) {
+  //   if (err || !data.length) {
+  //     req.flash("error", "Something went wrong");
+	// 	console.log(err);
+	// 	return res.redirect("back");
+  //   }
+  //   req.body.campground.lat = data[0].latitude;
+  //   req.body.campground.lng = data[0].longitude;
+  //   req.body.campground.location = data[0].formattedAddress;
 	
-	// First find and update the correct campgrounds
-    Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, campground){
-        if(err){
-            req.flash("error", err.message);
-            res.redirect("back");
-        } else {
-			// Second redirect to the show page. We need to add the Id.
-			// We can use req.params.id or updatedCampground._id
-            req.flash("success","Successfully Updated!");
-            res.redirect("/campgrounds/" + campground._id);
-        }
-    });
-  });
+  //   req.body.remdesivirInjection = req.body.remdesivirInjection;
+  // var bedCount = req.body.bedCount;
+	// // First find and update the correct campgrounds
+  //   Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, campground){
+  //       if(err){
+  //           req.flash("error", err.message);
+  //           res.redirect("back");
+  //       } else {
+	// 		// Second redirect to the show page. We need to add the Id.
+	// 		// We can use req.params.id or updatedCampground._id
+  //           req.flash("success","Successfully Updated!");
+  //           res.redirect("/campgrounds/" + campground._id);
+  //       }
+  //   });
+  // });
+  req.body.campground.remdesivirInjection = req.body.remdesivirInjection;
+  req.body.campground.bedCount = req.body.bedCount;
+  req.body.campground.address = req.body.address;
+  Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, campground){
+    if(err){
+        req.flash("error", err.message);
+        res.redirect("back");
+    } else {
+  // Second redirect to the show page. We need to add the Id.
+  // We can use req.params.id or updatedCampground._id
+        req.flash("success","Successfully Updated!");
+        res.redirect("/covicare/" + campground._id);
+    }
+});
 });
 
 // DESTROY ROUTE
@@ -173,12 +186,12 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
 router.delete("/:id", middleware.checkCampgroundOwnership, function (req, res) {
     Campground.findById(req.params.id, function (err, campground) {
         if (err) {
-            res.redirect("/campgrounds");
+            res.redirect("/covicare");
         } else {
 			//  delete the campground
 			campground.remove();
-			req.flash("success", "Campground deleted successfully!");
-			res.redirect("/campgrounds");
+			req.flash("success", "Covicare Centre deleted successfully!");
+			res.redirect("/covicare");
             }
         });
     });

@@ -23,7 +23,7 @@ const express 			= require("express"),
 // CALLING ROUTES
 const 	commentRoutes 		= require("./routes/comments"),
 		reviewRoutes     	= require("./routes/reviews"),
-		campgroundRoutes 	= require("./routes/campgrounds"),
+		campgroundRoutes 	= require("./routes/covicare"),
 		indexRoutes 		= require("./routes/index");
 
 
@@ -107,9 +107,9 @@ app.use(function(req, res, next){
 
 
 app.use(indexRoutes);
-app.use("/campgrounds", campgroundRoutes);
-app.use("/campgrounds/:id/comments", commentRoutes);
-app.use("/campgrounds/:id/reviews", reviewRoutes);
+app.use("/covicare", campgroundRoutes);
+app.use("/covicare/:id/comments", commentRoutes);
+app.use("/covicare/:id/reviews", reviewRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, process.env.IP, function(){

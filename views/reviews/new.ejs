@@ -4,7 +4,7 @@
 	<div class="row justify-content-center">
 		<div class="col-12 col-md-9 new-edit-forms">
 			<h2 class="text-center title-font">New Review: <%= campground.name %></h2>
-			<form action="/campgrounds/<%= campground._id %>/reviews" method="POST">
+			<form action="/covicare/<%= campground._id %>/reviews" method="POST">
 				<div class="form-group transparent-header-background p-3">
 					<label for="rating">Leave a rating:</label>
 					<fieldset class="starability-basic form-group" id="rating">
@@ -47,7 +47,7 @@
 					<button class="btn btn-lg btn-success btn-block">Submit!</button>
 				</div>
 			</form>
-			<a href="/campgrounds/<%= campground._id %>"><i class="fa fa-angle-left back" aria-hidden="true"></i> Back</a>
+			<a href="/covicare/<%= campground._id %>"><i class="fa fa-angle-left back" aria-hidden="true"></i> Back</a>
 		</div>
 	</div>
 </div>

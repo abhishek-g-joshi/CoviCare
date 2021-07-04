@@ -1,7 +1,7 @@
 {
   "name": "v1",
   "version": "1.0.0",
-  "description": "YelpCamp v1 (my second time making it)",
+  "description": "CoviCare v1",
   "main": "app.js",
   "scripts": {
     "test": "jest",

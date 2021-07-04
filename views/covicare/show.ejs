@@ -6,16 +6,18 @@
 				<div class="card p-3 mb-4">
 					<img src="<%= campground.image %> " class="img-fluid">
 					<div>
-						<h4 class="text-right mt-2">$<%= campground.price %>/night</h4>
-						<h1 class="title-font"><a><%= campground.name %></a></h1>
+						<h4 class="text-right mt-2">Bed Count: <%= campground.bedCount %></h4>
+						<h4 class="text-right mt-2">Remdesivir Count: <%= campground.remdesivirInjection %></h4>
+						<h1 class="title-font"><a><b><%= campground.name %></b></a></h1>
+						<h5> <b>Address: </b><%= campground.address %></h5>
 						<p><%= campground.description %></p>
 						<p>Submitted by <strong><a href="/users/<%= campground.author.id %>"><%= campground.author.username %></a></strong> on 
 							<em> <%= moment(campground.createdAt).format("dddd, MMMM Do YYYY")%></em>
 						</p>
 						<% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
 							<div class="d-inline-flex float-right">
-								<a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-outline-warning mr-2">Edit</a>
-								<form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+								<a href="/covicare/<%= campground._id %>/edit" class="btn btn-outline-warning mr-2">Edit</a>
+								<form action="/covicare/<%= campground._id %>?_method=DELETE" method="POST">
 									<button class="btn btn-outline-danger delete-button">Delete</button>
 								</form>
 							</div>
@@ -27,13 +29,7 @@
 			<div class="col-md-3 mb-4 d-flex flex-column">
 				<div class="card border border-white mb-2" id="map"></div>
 				<div class="mb-2">
-					<a href="https://www.accuweather.com/en/world-weather" class="btn btn-light show-btn"><i class="fa fa-sun-o" aria-hidden="true"></i> Weather</a>
-				</div>
-				<div class="mb-2">
-					<a href="https://ngmdb.usgs.gov/topoview/viewer/#4/39.98/-100.06" class="btn btn-light show-btn"><i class="fa fa-map" aria-hidden="true"></i> Topo Map</a>
-				</div>
-				<div class="mb-2">
-					<a href="https://www.rei.com/h/camping-and-hiking" class="btn btn-light show-btn"><i class="fa fa-binoculars" aria-hidden="true"></i> Gear Up</a>
+					<a href="https://www.cowin.gov.in/home" class="btn btn-light show-btn"><i class="fa fa-map" aria-hidden="true"></i> Cowin</a>
 				</div>
 			</div>
 		</div>
@@ -46,7 +42,7 @@
 						<% if (campground.rating === 0) { %>
 							<h5>Be the first to write a review!</h5>
 							<span>
-								<a class="btn btn-success float-right <% if (currentUser && campground.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/campgrounds/<%= campground._id %>/reviews/new">
+								<a class="btn btn-success float-right <% if (currentUser && campground.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/covicare/<%= campground._id %>/reviews/new">
 									Add Review <i class="fa fa-pencil add" aria-hidden="true"></i></a>
 							</span>
 					</div>
@@ -64,11 +60,11 @@
 						</p>
 						<!-- ADD REVIEW -->
 						<span>
-							<a class="btn btn-success float-right <% if (currentUser && campground.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/campgrounds/<%= campground._id %>/reviews/new">
+							<a class="btn btn-success float-right <% if (currentUser && campground.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/covicare/<%= campground._id %>/reviews/new">
 								Add Review <i class="fa fa-pencil add" aria-hidden="true"></i></a>
 						</span>
 						<!-- SEE ALL REVIEWS -->
-						<span class="float-right"><a href="/campgrounds/<%= campground._id %>/reviews"><i class="fa fa-search" aria-hidden="true"></i> See all reviews</a></span>
+						<span class="float-right"><a href="/covicare/<%= campground._id %>/reviews"><i class="fa fa-search" aria-hidden="true"></i> See all reviews</a></span>
 						<!-- DISPLAY RECENT REVIEWS -->
 						<p><h5>Recent reviews:</h5></p>
 					</div>
@@ -87,8 +83,8 @@
 							<div class="float-right d-inline-flex">
 								<% if(currentUser && review.author.id.equals(currentUser._id)){ %>
 									<a class="btn btn-xs btn-outline-warning mr-2"
-									   href="/campgrounds/<%=campground._id %>/reviews/<%=review._id %>/edit">Edit</a>
-									<form id="delete-form" action="/campgrounds/<%=campground._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
+									   href="/covicare/<%=campground._id %>/reviews/<%=review._id %>/edit">Edit</a>
+									<form id="delete-form" action="/covicare/<%=campground._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
 										<input type="submit" class="btn btn-xs btn-outline-danger delete-button" value="Delete">
 									</form>
 								<% } %>
@@ -108,7 +104,7 @@
 					<div class="d-flex justify-content-between">
 						<h5>Be the first to write a comment!</h5>
 						<div>
-							<a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-success">Add Comment <i class="fa fa-comment add" aria-hidden="true"></i></a>
+							<a href="/covicare/<%= campground._id %>/comments/new" class="btn btn-success">Add Comment <i class="fa fa-comment add" aria-hidden="true"></i></a>
 						</div>
 					</div>
 				</div>
@@ -116,7 +112,7 @@
 		</div>
 					<% } else { %>
 					<div class="text-right">
-						<a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-success">Add Comment <i class="fa fa-comment add" aria-hidden="true"></i></a>
+						<a href="/covicare/<%= campground._id %>/comments/new" class="btn btn-success">Add Comment <i class="fa fa-comment add" aria-hidden="true"></i></a>
 					</div>
 					<hr>
 				<% campground.comments.forEach(function(comment){ %>
@@ -129,8 +125,8 @@
 									<p class="card-text"><%= comment.text %></p>
 									<% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
 									<div class="float-right d-inline-flex">
-										<a href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit" class="btn btn-xs btn-outline-warning mr-2">Edit</a>
-										<form action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+										<a href="/covicare/<%=campground._id%>/comments/<%=comment._id%>/edit" class="btn btn-xs btn-outline-warning mr-2">Edit</a>
+										<form action="/covicare/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
 											<button class="btn btn-xs btn-outline-danger delete-button">Delete</button>
 										</form>
 									</div>
@@ -147,7 +143,7 @@
 	</div>
 
 <!-- Google Maps API Script -->
-<script>
+<!-- <script>
   function initMap() {
     var lat = <%= campground.lat %>;
     var lng = <%= campground.lng %>
@@ -174,6 +170,6 @@
     });
   }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm0aemkm9OGTco0g3OlZv3L11CUFn4GdM&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY4KrSmNNdCc5jY1Kl77hXJYFzEwITSe0&callback=initMap"></script> -->
 
 <%- include ("../partials/footer") %>
